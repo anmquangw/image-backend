@@ -1,9 +1,5 @@
 import { Module } from '@nestjs/common';
-import { MongodbService } from './mongodb.service';
-import { MongodbController } from './mongodb.controller';
+import { mongodbProviders } from './mongodb.providers';
 
-@Module({
-  controllers: [MongodbController],
-  providers: [MongodbService]
-})
+@Module({ providers: [...mongodbProviders], exports: [...mongodbProviders] })
 export class MongodbModule {}
