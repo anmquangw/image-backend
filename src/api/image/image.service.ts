@@ -15,16 +15,16 @@ export class ImageService {
   create(createImageDto: CreateImageDto) {
     return this.imageModel.create(createImageDto);
   }
-  findAll() {
+  async findAll() {
     return this.imageModel.find();
   }
-  findOne(id: number) {
-    return `This action returns a #${id} image`;
+  async findOne(id: string) {
+    return this.imageModel.findById(id);
   }
-  update(id: number, updateImageDto: UpdateImageDto) {
-    return `This action updates a #${id} image`;
+  async update(updateImageDto: UpdateImageDto[]): Promise<any> {
+    return this.imageModel.updateMany(updateImageDto, { upsert: true });
   }
-  remove(id: number) {
-    return `This action removes a #${id} image`;
+  async remove(updateImageDto: UpdateImageDto[]): Promise<any> {
+    return this.imageModel.deleteMany({ _id: { $in: updateImageDto } });
   }
 }

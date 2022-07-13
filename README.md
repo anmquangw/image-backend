@@ -16,3 +16,4 @@ NODE_MODULES_CACHE=true
 pnpm i @nestjs/mongoose mongoose
 pnpm i @nestjs/config
 pnpm i class-validator class-transformer
+pnpm i mongoose-unique-validator

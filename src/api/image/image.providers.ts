@@ -5,8 +5,14 @@ import { ImageSchema } from './schemas/image.schema';
 export const imageProviders = [
   {
     provide: schemaConfigs.IMAGE_MODEL.toString(),
-    useFactory: (connection: Connection) =>
-      connection.model('Image', ImageSchema),
+    useFactory: (connection: Connection) => {
+      const schema = ImageSchema;
+      schema.plugin(require('mongoose-unique-validator'), {
+        message: 'your custom message',
+      }); // or you can integrate it without the options   schema.plugin(require('mongoose-unique-validator')
+
+      return connection.model('Image', schema);
+    },
     inject: [dbConfigs],
   },
 ];
